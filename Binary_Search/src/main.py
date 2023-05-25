@@ -67,19 +67,57 @@ class Tree:
                 f"expected node value: {node.key} doesn't exist within tree and therefore can't be searched."
             )
         else:
-            if root.key == node.key:
+            if node.key == root.key:
                 return node
             elif node.key < root.key:
                 return self._search_recursive(root.left, node)
             elif node.key > root.key:
                 return self._search_recursive(root.right, node)
 
-    def delete(self, key):
+    def delete_branch(self, node: Node):
         """
         - Deletes the node with the given key from the Tree.
         - Raises exception if the node is not found.
         """
-        pass
+        self._delete_branch_recursive(self.root, node)
+
+    def _delete_branch_recursive(self, root: Node, node: Node):
+        if root is None:
+            raise ValueError(
+                f"expected node value: {node.key} doesn't exist within tree and therefore can't be deleted."
+            )
+        else:
+            if node.key == root.key:
+                # TODO: DELETE node from tree
+                return None
+            elif node.key < root.key:
+                return self._delete_branch_recursive(root.left, node)
+            elif node.key > root.key:
+                return self._delete_branch_recursive(root.right, node)
+
+    # TODO: Create a def delete_reassign_branch()
+    """
+    def delete_reassign_branch(self, node: Node):
+        '''
+        - Deletes the node with the given key from the Tree.
+        - Raises exception if the node is not found.
+        '''
+        self._delete_branch_recursive(self.root, node)
+
+    def _delete_reassign_branch_recursive(self, root: Node, node: Node):
+        if root is None:
+            raise ValueError(
+                f"expected node value: {node.key} doesn't exist within tree and therefore can't be deleted."
+            )
+        else:
+            if node.key == root.key:
+                # IF ROOT branches are NONE then DELETE node from tree
+                # IF ROOT.LEFT is NOT NONE then delete and insert 
+            elif node.key < root.key:
+                return self._delete_branch_recursive(root.left, node)
+            elif node.key > root.key:
+                return self._delete_branch_recursive(root.right, node)
+    """
 
     def is_empty(self):
         """

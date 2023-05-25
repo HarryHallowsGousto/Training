@@ -27,6 +27,7 @@ def test_insert_generates_root_node():
     tree.insert(node)
 
     # Assert
+    assert tree.root is not None
     assert tree.root.key == node.key
 
 
@@ -59,3 +60,19 @@ def test_search_does_not_find_node():
         # Assert
         assert searched_node is None
 
+
+def test_delete_node_from_tree():
+    # Arrange
+    tree = Tree()
+    tree.insert(Node(0))
+    tree.insert(Node(20))
+    tree.insert(Node(40))
+
+    # Act
+    tree.delete_branch(Node(20))
+
+    with pytest.raises(ValueError):
+        search_deleted_node = tree.search(Node(20))
+
+        # Assert
+        assert search_deleted_node is None
