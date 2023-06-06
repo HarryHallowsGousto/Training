@@ -5,6 +5,7 @@ from typing import Optional
 @dataclass
 class Node:
     key: int
+    parent: Optional["Node"] = None
     left: Optional["Node"] = None
     right: Optional["Node"] = None
 
@@ -41,11 +42,13 @@ class Tree:
         if node.key < root.key:
             if root.left is None:
                 root.left = node
+                node.parent = root
             else:
                 self._insert_recursive(root.left, node)
         else:
             if root.right is None:
                 root.right = node
+                node.parent = root
             else:
                 self._insert_recursive(root.right, node)
 
